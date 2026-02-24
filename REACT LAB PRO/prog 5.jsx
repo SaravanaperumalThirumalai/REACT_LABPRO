@@ -1,0 +1,54 @@
+import { useState, useEffect } from "react"; 
+function App() { 
+  const [greeting, setGreeting] = useState(""); 
+ 
+  useEffect(() => { 
+    const hour = new Date().getHours().toString().padStart(2,'0'); 
+    const min = new Date().getMinutes().toString().padStart(2,'0'); 
+    const secs = new Date().getSeconds().toString().padStart(2,'0'); 
+ 
+    if (hour < 12) { 
+      setGreeting(`Good Morning<br/>${hour}:${min}:${secs}`); 
+    } else if (hour >= 12 && hour < 17) { 
+      setGreeting(`Good Afternoon<br/>${hour}:${min}:${secs}`); 
+    } else if (hour >= 17 && hour < 20) { 
+      setGreeting(`Good Evening<br/>${hour}:${min}:${secs}`); 
+    } else { 
+      setGreeting(`Good Night<br/>${hour}:${min}:${secs}`); 
+    } 
+  }, []); 
+ 
+  return ( 
+    <div 
+      style={{ 
+        textAlign: "center", 
+        marginTop : "80px", 
+        fontFamily: "Arial, sans-serif", 
+      }} 
+    > 
+   <div 
+        style={{ 
+          display: "inline-block", 
+          padding: "20px 40px", 
+          borderRadius: "12px", 
+          backgroundColor: "#66b5eeff", 
+          boxShadow: "0 0 10px rgba(0,0,0,0.2)", 
+        }} 
+      > 
+        <h1 
+          style={{  
+            margin: 0, 
+            fontSize: "30px", 
+            color: "#0a0202ff", 
+          }} 
+          dangerouslySetInnerHTML={{ __html: greeting }} 
+        ></h1> 
+ 
+        <p style={{ marginTop : "10px", color: "#0e0a0aff" }}> 
+This greeting updates based on your system time. 
+</p> 
+</div> 
+</div> 
+); 
+} 
+export default App;

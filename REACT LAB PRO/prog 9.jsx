@@ -1,0 +1,63 @@
+import { useState } from "react"; 
+export default function App() { 
+  const [isDark, setIsDark] = useState(false); 
+  const lightTheme = { 
+    backgroundColor: "#ffffff", 
+    color: "#111827", 
+  }; 
+  const darkTheme = { 
+    backgroundColor: "#0f172a", 
+    color: "#e6eef8", 
+  }; 
+  const currentTheme = isDark ? darkTheme : lightTheme; 
+  return ( 
+    <div 
+      style={{ 
+        minHeight : "100vh", 
+        padding: "40px 20px", 
+        transition: "background-color 250ms ease, color 250ms ease", 
+        ...currentTheme, 
+        fontFamily: "Arial, sans-serif", 
+      }} 
+    > 
+      <div style={{ maxWidth : 800, margin: "0 auto", textAlign: "center" }}> 
+        <h1 style={{ marginBottom : 6 }}>Theme Toggle Example</h1> 
+        <p style={{ marginTop : 0, marginBottom : 18 }}> 
+          Click the button to switch between Light and Dark mode. 
+        </p> 
+        <button 
+          onClick={() => setIsDark((s) => !s)} 
+          aria-pressed={isDark} 
+          style={{ 
+            padding: "10px 16px", 
+            borderRadius: 8, 
+            border: "none", 
+            cursor: "pointer", 
+            boxShadow: "0 2px 6px rgba(0,0,0,0.12)", 
+            background: isDark ? "#1f2937" : "#f3f4f6", 
+            color: isDark ? "#e6eef8" : "#111827", 
+            fontWeight: 600, 
+            marginBottom : 24, 
+          }} 
+        > 
+          {isDark ? "Switch to Light Mode" : "Switch to Dark Mode"} 
+        </button> 
+        <div 
+          style={{ 
+            padding: 20, 
+            borderRadius: 10, 
+            border: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : 
+"rgba(0,0,0,0.08)"}`, 
+            background: isDark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)", 
+            textAlign: "left", 
+          }} 
+        > 
+          <h2 style={{ margin: "0 0 8px 0" }}>Preview Area</h2> 
+          <p style={{ margin: 0 }}> 
+            This text and the page background change according to the selected theme. 
+          </p> 
+        </div> 
+      </div> 
+    </div> 
+  ); 
+}
