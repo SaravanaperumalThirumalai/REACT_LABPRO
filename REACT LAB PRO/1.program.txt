@@ -1,0 +1,75 @@
+1.program
+
+
+Create a Counter with increment ,decrement and reset 
+buttons
+
+
+File: Main.jsx 
+import React from "react"; 
+import { createRoot } from "react-dom/client"; 
+import App from "./App"; 
+import "./index.css"; 
+createRoot(document.getElementById("root")).render( 
+<React.StrictMode> 
+<App /> 
+</React.StrictMode> 
+); 
+File: Src/App.jsx 
+import { useState } from "react"; 
+function App() { 
+  const [count, setCount] = useState(0); 
+  const increment = () => { 
+    setCount(count + 1); 
+  }; 
+  const decrement = () => { 
+    setCount(count - 1); 
+  }; 
+ const reset = () => { 
+    setCount(0); 
+  }; 
+  return ( 
+    <div style={{ textAlign: "center", marginTop: "50px" }}> 
+      <h1>React Counter App</h1> 
+      <h2>{count}</h2> 
+      <button onClick={increment} style={{ margin: "10px" }}> 
+        Increment 
+      </button> 
+      <button onClick={decrement} style={{ margin: "10px" }}> 
+        Decrement 
+      </button> 
+       <button onClick={reset} style={{ margin: "10px" }}> 
+        Reset 
+      </button> 
+    </div> 
+  ); 
+} 
+export default App; 
+EXPLANATION: 
+ 
+import { useState } from "react"; 
+Imports the useState Hook for creating state variables. 
+function App() { 
+Defines the main App component. 
+const [count, setCount] = useState(0); 
+Creates a state variable count with initial value 0. 
+ setCount is used to update it. 
+Increment Function : Adds 1 to the current count. 
+const increment = () => { 
+setCount(count + 1); 
+}; 
+Decrement Function : Subtracts 1 from the current count. 
+const decrement = () => { 
+setCount(count - 1); 
+}; 
+Reset Function : Sets count back to 0. 
+const reset = () => { 
+setCount(0); 
+}; 
+UI Section: Displays the heading and the counter output dynamically. 
+Buttons 
+<button onClick={increment}>Increment</button> 
+<button onClick={decrement}>Decrement</button> 
+<button onClick={reset}>Reset</button> 
+Each button is linked to its respective function. 
+export default App; 

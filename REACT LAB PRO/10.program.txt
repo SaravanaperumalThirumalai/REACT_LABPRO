@@ -1,0 +1,193 @@
+10.program
+
+
+
+import React from "react"; 
+import ReactDOM from "react-dom/client"; 
+import { BrowserRouter, Routes, Route } from "react-router-dom"; 
+ 
+import Home from "./Home"; 
+import Post from "./posts"; 
+ 
+ReactDOM.createRoot(document.getElementById("root")).render( 
+  <BrowserRouter> 
+    <Routes> 
+      <Route path="/" element={<Home />} /> 
+      <Route path="/post/:id" element={<Post />} /> 
+    </Routes> 
+  </BrowserRouter> 
+); 
+ 
+File : src/Home.jsx 
+import { Link } from "react-router-dom"; 
+ 
+export default function Home() { 
+  const posts = [ 
+    { 
+      id: 1, 
+      title: "React Introduction", 
+      content: 
+        "React is a JavaScript library used to build fast and interactive user 
+interfaces..." 
+    }, 
+    { 
+      id: 2, 
+      title: "Understanding Components", 
+      content: 
+        "Components are the reusable building blocks of a React application..." 
+    } 
+  ]; 
+ 
+  return ( 
+    <div 
+      style={{ 
+        padding: "30px", 
+        fontFamily: "Arial, sans-serif", 
+        maxWidth: "900px", 
+        margin: "0 auto", 
+      }} 
+    > 
+      <h1 
+        style={{ 
+          marginBottom: "20px", 
+          textAlign: "center", 
+          color: "#222", 
+        }} 
+      > 
+        
+ 
+ 
+ Mini Blog – Home 
+      </h1> 
+ 
+      <p 
+        style={{ 
+          textAlign: "center", 
+          marginBottom: "30px", 
+          color: "#555", 
+          fontSize: "15px", 
+        }} 
+      > 
+        Select a blog post to view the full article. 
+      </p> 
+ 
+      {posts.map((post) => ( 
+        <div 
+          key={post.id} 
+          style={{ 
+            padding: "20px", 
+            marginBottom: "20px", 
+            borderRadius: "12px", 
+ 
+            // Card Background (Soft Blue) 
+            background: "linear-gradient(135deg, #e8f0ff, #f2f7ff)", 
+ 
+            border: "1px solid #cdd9f0", 
+            boxShadow: "0 2px 8px rgba(0,0,0,0.1)", 
+          }} 
+        > 
+          <h2 style={{ margin: "0 0 10px 0", color: "#1a3d7c" }}> 
+            {post.title} 
+          </h2> 
+ 
+          <p style={{ marginBottom: "12px", color: "#444" }}> 
+            {post.content.substring(0, 90)}... 
+          </p> 
+ 
+          <Link 
+            to={`/post/${post.id}`} 
+            style={{ 
+              textDecoration: "none", 
+              color: "#0b5ed7", 
+              fontWeight: "bold", 
+            }} 
+          > 
+            Read Full Post → 
+          </Link> 
+        </div> 
+      ))} 
+    </div> 
+  ); 
+} 
+ 
+File : src/Post.jsx 
+import { useParams, Link } from "react-router-dom"; 
+ 
+export default function Post() { 
+  const { id } = useParams(); 
+ 
+  const posts = [ 
+    { 
+      id: 1, 
+      title: "React Introduction", 
+      content: 
+        "React is a JavaScript library developed by Facebook.\n\nIt helps build fast, 
+responsive user interfaces by using components and a Virtual DOM.\n\nReact 
+allows developers to break large UIs into smaller reusable parts, making 
+development efficient." 
+    }, 
+    { 
+      id: 2, 
+      title: "Understanding Components", 
+      content: 
+        "Components are independent building blocks in React.\n\nEach component 
+manages its own structure and UI using JSX.\n\nThey improve reusability, 
+readability, and organization in React applications." 
+    } 
+  ]; 
+ 
+  const post = posts.find((p) => p.id === parseInt(id)); 
+ 
+  if (!post) { 
+    return ( 
+      <h2 style={{ padding: 20, fontFamily: "Arial" }}>Post Not Found</h2> 
+    ); 
+  } 
+ 
+  return ( 
+    <div 
+      style={{ 
+        padding: "30px", 
+        fontFamily: "Arial, sans-serif", 
+        maxWidth: "800px", 
+        margin: "0 auto", 
+      }} 
+    > 
+      <Link 
+        to="/" 
+        style={{ 
+          display: "inline-block", 
+          marginBottom: "20px", 
+          textDecoration: "none", 
+          color: "#0b5ed7", 
+          fontWeight: 600, 
+        }} 
+      > 
+        ← Back to Home 
+      </Link> 
+ 
+      <div 
+        style={{ 
+          padding: "25px", 
+          borderRadius: "12px", 
+          background: "linear-gradient(135deg, #fff8e6, #fff2cc)", 
+          border: "1px solid #f0d9a8", 
+          boxShadow: "0 2px 8px rgba(0,0,0,0.1)", 
+        }} 
+      > 
+        <h1 style={{ marginTop: 0, color: "#8a5400" }}>{post.title}</h1> 
+ 
+        <p 
+          style={{ 
+            lineHeight: "1.7", 
+            whiteSpace: "pre-line", 
+            color: "#444", 
+            fontSize: "16px", 
+          }} 
+        > 
+          {post.content} 
+        </p> 
+      </div> 
+    </div> 
+  ); 
+} 
